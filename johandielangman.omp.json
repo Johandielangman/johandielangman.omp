@@ -34,7 +34,7 @@
           "background": "p:pink",
           "foreground": "p:text",
           "options": {
-            "folder_icon": "..\ue5fe..",
+            "folder_icon": "..\ue5fe ..",
             "home_icon": "~",
             "style": "agnoster_short"
           },
@@ -48,7 +48,7 @@
           "foreground": "p:text",
           "powerline_symbol": "\ue0b4",
           "style": "powerline",
-          "template": "{{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }} \uf192 {{ end }} \uec39 {{ .Full }}{{ end }}",
+          "template": "{{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }} \uf192{{ end }} \uec39 {{ .Full }}{{ end }}",
           "type": "python"
         },
         {

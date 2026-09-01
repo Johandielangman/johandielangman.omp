@@ -1,0 +1,116 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "palette": {
+    "os": "#ACB0BE",
+    "pink": "#F5BDE6",
+    "lavender": "#B7BDF8",
+    "blue": "#8AADF4",
+    "wight": "#FFFFFF",
+    "text": "#494D64",
+    "spotify": "#A6E3A1"
+  },
+  "blocks": [
+    {
+      "alignment": "left",
+      "segments": [
+        {
+          "background": "p:blue",
+          "foreground": "p:wight",
+          "powerline_symbol": "\ue0b4",
+          "leading_diamond": "\ue0b6",
+          "style": "diamond",
+          "template": "🐓",
+          "type": "text"
+        },
+        {
+          "background": "p:blue",
+          "foreground": "p:text",
+          "powerline_symbol": "\ue0b4",
+          "style": "powerline",
+          "template": "{{ .UserName }}",
+          "type": "session"
+        },
+        {
+          "background": "p:pink",
+          "foreground": "p:text",
+          "options": {
+            "folder_icon": "..\ue5fe..",
+            "home_icon": "~",
+            "style": "agnoster_short"
+          },
+          "powerline_symbol": "\ue0b4",
+          "style": "powerline",
+          "template": " {{ .Path }}",
+          "type": "path"
+        },
+        {
+          "background": "p:blue",
+          "foreground": "p:text",
+          "powerline_symbol": "\ue0b4",
+          "style": "powerline",
+          "template": "{{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }} \uf192 {{ end }} \uec39 {{ .Full }}{{ end }}",
+          "type": "python"
+        },
+        {
+          "type": "spotify",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b4",
+          "foreground": "p:text",
+          "background": "p:spotify",
+          "options": {
+            "playing_icon": "\ue602 ",
+            "paused_icon": "\uf04c",
+            "stopped_icon": "\uf04d ",
+            "ad_icon": "\ueebb "
+          }
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "right",
+      "segments": [
+        {
+          "background": "p:lavender",
+          "foreground": "p:text",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "style": "diamond",
+          "options": {
+            "branch_icon": "\ue725 ",
+            "cherry_pick_icon": "\ue29b ",
+            "commit_icon": "\uf417 ",
+            "merge_icon": "\ue727 ",
+            "no_commits_icon": "\uf0c3 ",
+            "rebase_icon": "\ue728 ",
+            "revert_icon": "\uf0e2 ",
+            "tag_icon": "\uf412 "
+          },
+          "template": " {{ .HEAD }} ",
+          "type": "git"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "foreground": "p:blue",
+          "style": "plain",
+          "template": "\uf0a4 ",
+          "type": "text"
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "secondary_prompt": {
+    "background": "transparent",
+    "foreground": "p:blue",
+    "template": "❯ "
+  },
+  "final_space": true,
+  "version": 4
+}

@@ -5,6 +5,7 @@
     "pink": "#F5BDE6",
     "lavender": "#B7BDF8",
     "blue": "#8AADF4",
+    "red": "#ED8796",
     "wight": "#FFFFFF",
     "text": "#494D64",
     "spotify": "#A6E3A1"
@@ -27,14 +28,14 @@
           "foreground": "p:text",
           "powerline_symbol": "\ue0b4",
           "style": "powerline",
-          "template": "{{ .UserName }}",
+          "template": "{{ if .Segments.Contains \"Git\" }}{{ .Segments.Git.User.Email }}{{ else }}{{ .UserName }}{{ end }}",
           "type": "session"
         },
         {
           "background": "p:pink",
           "foreground": "p:text",
           "options": {
-            "folder_icon": "..\ue5fe ..",
+            "folder_icon": "\ue5fe ",
             "home_icon": "~",
             "style": "agnoster_short"
           },
@@ -57,9 +58,10 @@
           "powerline_symbol": "\ue0b4",
           "foreground": "p:text",
           "background": "p:spotify",
+          "template": " {{ .Icon }}{{ if ne .Status \"stopped\" }}{{ if gt (len .Artist) 20 }}{{ trunc 20 .Artist }}...{{ else }}{{ .Artist }}{{ end }} - {{ if gt (len .Track) 20 }}{{ trunc 20 .Track }}...{{ else }}{{ .Track }}{{ end }}{{ end }}",
           "options": {
             "playing_icon": "\ue602 ",
-            "paused_icon": "\uf04c",
+            "paused_icon": "\uf04c ",
             "stopped_icon": "\uf04d ",
             "ad_icon": "\ueebb "
           }
@@ -73,21 +75,20 @@
         {
           "background": "p:lavender",
           "foreground": "p:text",
+          "style": "diamond",
           "leading_diamond": "\ue0b6",
           "trailing_diamond": "\ue0b4",
-          "style": "diamond",
+          "type": "git",
           "options": {
-            "branch_icon": "\ue725 ",
-            "cherry_pick_icon": "\ue29b ",
-            "commit_icon": "\uf417 ",
-            "merge_icon": "\ue727 ",
-            "no_commits_icon": "\uf0c3 ",
-            "rebase_icon": "\ue728 ",
-            "revert_icon": "\uf0e2 ",
-            "tag_icon": "\uf412 "
+            "branch_template": "{{ if gt (len .Branch) 15 }}{{ trunc 20 .Branch }}...{{ else }}{{ .Branch }}{{ end }}"
           },
-          "template": " {{ .HEAD }} ",
-          "type": "git"
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:pink{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:red{{ end }}",
+            "{{ if gt .Ahead 0 }}p:lavender{{ end }}",
+            "{{ if gt .Behind 0 }}p:blue{{ end }}"
+          ],
+          "template": " {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }} "
         }
       ],
       "type": "prompt"
@@ -99,6 +100,9 @@
         {
           "foreground": "p:blue",
           "style": "plain",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}p:red{{ else }}p:blue{{ end }}"
+          ],
           "template": "\uf0a4 ",
           "type": "text"
         }
